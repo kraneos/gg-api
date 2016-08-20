@@ -40,6 +40,10 @@ var dashboard = new ParseDashboard({
         {
             "user": "egentile",
             "pass": "seggu2016"
+        },
+        {
+            "user": "user",
+            "pass": "pass"
         }
     ]
 }, true);
