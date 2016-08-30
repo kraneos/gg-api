@@ -82,6 +82,7 @@ var registerMountPath = process.env.REGISTER_MOUNT || '/register';
 var registerClientMountPath = process.env.REGISTER_CLIENT_MOUNT || '/register-client';
 app.use(bodyParser.json());
 app.use(registerMountPath, register);
+console.log('registering registerClient on ' + registerClientMountPath);
 app.use(registerClientMountPath, registerClient);
 
 
