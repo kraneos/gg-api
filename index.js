@@ -48,6 +48,10 @@ var register = require('./routes/register')(
     process.env.SERVER_URL || "http://localhost:1337/parse",
     process.env.APP_ID || "myAppId",
     process.env.MASTER_KEY || "myMasterKey");
+var registerClient = require('./routes/register-client')(
+    process.env.SERVER_URL || "http://localhost:1337/parse",
+    process.env.APP_ID || "myAppId",
+    process.env.MASTER_KEY || "myMasterKey");
 
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
@@ -73,6 +77,8 @@ var bodyParser = require('body-parser');
 var registerMountPath = process.env.REGISTER_MOUNT || '/register';
 app.use(bodyParser.json());
 app.use(registerMountPath, register);
+app.use(registerMountPath, registerClient);
+
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function (req, res) {
@@ -81,9 +87,9 @@ app.get('/', function (req, res) {
 
 // There will be a test page available on the /test path of your server url
 // Remove this before launching your app
-app.get('/test', function (req, res) {
-    res.sendFile(path.join(__dirname, '/public/test.html'));
-});
+// app.get('/test', function (req, res) {
+//     res.sendFile(path.join(__dirname, '/public/test.html'));
+// });
 
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
