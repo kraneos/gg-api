@@ -79,9 +79,10 @@ app.use(dashboardMountPath, dashboard);
 
 var bodyParser = require('body-parser');
 var registerMountPath = process.env.REGISTER_MOUNT || '/register';
+var registerClientMountPath = process.env.REGISTER_CLIENT_MOUNT || '/register-client';
 app.use(bodyParser.json());
 app.use(registerMountPath, register);
-app.use(registerMountPath, registerClient);
+app.use(registerClientMountPath, registerClient);
 
 
 // Parse Server plays nicely with the rest of your web routes
