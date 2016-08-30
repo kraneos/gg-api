@@ -3,43 +3,72 @@ module.exports = function (serverUrl, appId, masterKey) {
 
     var router = express.Router();
 
-    router.post('/', function (req, res) {
+    router.post('/', onRegisterClient);
+
+    return router;
+
+    function onRegisterClient(req, res) {
         var Parse = require('parse/node');
         Parse.initialize(appId, null, masterKey);
         Parse.Cloud.useMasterKey();
         Parse.serverURL = serverUrl;
         var SegguClient = Parse.Object.extend('SegguClient');
-
+        var Client = Parse.Object.extend('Client');
         new Parse.Query(SegguClient)
             .get(req.body.segguClient.objectId, {
-                success: function (client) {
-                    new Parse.Query(Parse.Role)
-                        .equalsTo('name', client.name + 'Clients')
-                        .find({
-                            success: function (roles) {
-                                if (roles.length > 0) {
-                                    var user = new Parse.User();
-                                    user.set('username', req.body.username);
-                                    user.set('password', req.body.password);
-                                    user.set('email', req.body.email);
-                                    user.set('segguClient', client);
-                                    user.save({
-                                        success: function (user) {
-                                            roles[0].getUsers().add(user).save({
-                                                success: res.send,
-                                                error: throwError
-                                            });
-                                        },
-                                        error: throwError
-                                    });
-                                } else {
-                                    throwError();
-                                }
-                            }
-                        })
-                },
+                success: onGetSegguClientSuccess,
                 error: throwError
             });
+
+        function onGetSegguClientSuccess(segguClient) {
+            new Parse.Query(Client)
+                .equalTo('email', req.body.email)
+                .find({
+                    success: onGetClientSuccess,
+                    error: throwError
+                });
+
+            function onGetClientSuccess(client) {
+                if (client.length > 0) {
+                    new Parse.Query(Parse.Role)
+                        .equalTo('name', segguClient.get('name') + 'Clients')
+                        .find({
+                            success: onGetRolesSuccess,
+                            error: throwError
+                        });
+                } else {
+                    throwNewError('No existe un asegurado con su email registrado en ' + segguClient.get('name'));
+                }
+
+                function onGetRolesSuccess(roles) {
+                    if (roles.length > 0) {
+                        var user = new Parse.User();
+                        user.set('username', req.body.username);
+                        user.set('password', req.body.password);
+                        user.set('email', req.body.email);
+                        user.set('segguClient', segguClient);
+                        user.set('client', client[0]);
+                        user.save({
+                            success: onSaveUserSuccess,
+                            error: throwError
+                        });
+                    } else {
+                        throwError();
+                    }
+
+                    function onSaveUserSuccess(user) {
+                        roles[0].getUsers().add(user).save({
+                            success: onAddRoleSuccess,
+                            error: throwError
+                        });
+
+                        function onAddRoleSuccess() {
+                            res.send(JSON.stringify(user));
+                        }
+                    }
+                }
+            }
+        }
 
         function throwError() {
             res.status(500).send('El usuario no se pudo crear.');
@@ -48,6 +77,7 @@ module.exports = function (serverUrl, appId, masterKey) {
         function throwNewError(message) {
             res.status(500).send(message);
         }
-    });
-    return router;
+
+
+    }
 };

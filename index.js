@@ -74,7 +74,7 @@ var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use(mountPath, api);
 
 // make the Parse Dashboard available at /dashboard
-var dashboardMountPath = process.env.PARSE_DASHBOARD_MOUNT;
+var dashboardMountPath = process.env.PARSE_DASHBOARD_MOUNT || '/dashboard';
 app.use(dashboardMountPath, dashboard);
 
 var bodyParser = require('body-parser');
