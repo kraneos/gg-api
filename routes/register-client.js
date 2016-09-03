@@ -22,7 +22,7 @@ module.exports = function (serverUrl, appId, masterKey) {
 
         function onGetSegguClientSuccess(segguClient) {
             new Parse.Query(Client)
-                .equalTo('email', req.body.email)
+                .equalTo('mail', req.body.email)
                 .find({
                     success: onGetClientSuccess,
                     error: throwError
