@@ -26,6 +26,7 @@ module.exports = function (serverUrl, appId, masterKey) {
         function createSegguClient(req, SegguClient) {
             var segguClient = new SegguClient();
             segguClient.set('name', req.body.company);
+            segguClient.set('paidAt', new Date());
 
             segguClient.save().then(function (savedClient) {
                 var clientRole = getNewRole(req.body.company);
