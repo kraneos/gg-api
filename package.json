@@ -14,8 +14,8 @@
     "express": "~4.11.x",
     "kerberos": "~0.0.x",
     "parse": "~1.8.0",
-    "parse-dashboard": "^1.0.14",
-    "parse-server": "~2.2.13"
+    "parse-dashboard": "^1.0.18",
+    "parse-server": "^2.2.18"
   },
   "scripts": {
     "start": "node index.js"

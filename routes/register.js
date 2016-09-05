@@ -44,7 +44,6 @@ module.exports = function (serverUrl, appId, masterKey) {
                         var savedRole = savedRoles[0];
                         savedRole.getUsers().add(createdUser);
                         savedRole.save().then(function () {
-                            console.log("Agregue los roles");
                             res.send("user created");
                         }, throwError);
                     }, throwError);
