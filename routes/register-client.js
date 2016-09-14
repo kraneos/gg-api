@@ -47,7 +47,7 @@ module.exports = function (serverUrl, appId, masterKey) {
                         user.set('password', req.body.password);
                         user.set('email', req.body.email);
                         user.set('segguClient', segguClient);
-                        user.set('client', client[0]);
+                        user.set('client', getClientBySegguClient(client, segguClient));
                         user.save({
                             success: onSaveUserSuccess,
                             error: throwError
@@ -65,6 +65,18 @@ module.exports = function (serverUrl, appId, masterKey) {
                         function onAddRoleSuccess() {
                             res.send(JSON.stringify(user));
                         }
+                    }
+
+                    function getClientBySegguClient(clients, segguClient) {
+                        var segguClientName = segguClient.get('name');
+                        for (var i = 0; i < client.length; i++) {
+                            var acl = client[i].getACL();
+                            if (acl.getRoleReadAccess(segguClientName) || acl.getRoleReadAccess(segguClientName + 'Clients')) {
+                                return client[i];
+                            }
+                        }
+
+                        return null;
                     }
                 }
             }

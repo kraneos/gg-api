@@ -16,7 +16,7 @@
             ],
             "env": {
                 "NODE_ENV": "development",
-                "SERVER_URL": "http://10.211.55.2:1337/parse"
+                "SERVER_URL": "http://localhost:1337/parse"
             },
             "externalConsole": false,
             "sourceMaps": false,

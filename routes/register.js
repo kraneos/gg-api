@@ -59,7 +59,8 @@ module.exports = function (serverUrl, appId, masterKey) {
             }, throwError);
         }
 
-        function throwError() {
+        function throwError(error) {
+            console.log(error);
             res.status(500).send('El usuario no se pudo crear.');
         }
 
