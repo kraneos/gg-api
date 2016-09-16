@@ -164,7 +164,7 @@ Abrir consola como administrador y ejecutar
 `npm install -g mongodb-runner`
 `mongodb-runner start`
 
-Descargarse de [Google Drive]() el dump de la DB.
+Descargarse de [Google Drive](https://drive.google.com/open?id=0B3mGN4mG9YR4OGlXazEyd3ppUHc) el dump de la DB.
 Descomprimir el zip.
 
 Ejecutar el comando.
