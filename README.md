@@ -146,3 +146,27 @@ Parse.initializeWithConfiguration(ParseClientConfiguration(block: { (configurati
 }))
 ```
 You can change the server URL in all of the open-source SDKs, but we're releasing new builds which provide initialization time configuration of this property.
+
+
+# Para probar en entorno de desarrollo
+Correr los comandos en este orden
+`npm install`
+`npm start`
+
+Abrir el browser en la url [link](http://localhost:4200)
+
+# Para llenar de datos la db
+
+Instalar MongoDB y agregar al `PATH` el directorio bin de este.
+[Descargar MongoDB](https://www.mongodb.com/dr/fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-3.2.9-signed.msi/download)
+
+Abrir consola como administrador y ejecutar
+`npm install -g mongodb-runner`
+`mongodb-runner start`
+
+Descargarse de [Google Drive]() el dump de la DB.
+Descomprimir el zip.
+
+Ejecutar el comando.
+
+`mongorestore.exe -h localhost:27017 -d dev .\{DirectorioDelDump}`
