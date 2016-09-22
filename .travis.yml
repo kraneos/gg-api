@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+- node
+install:
+- npm install
+deploy:
+  provider: heroku
+  api_key:
+    secure: APttxgvYuDRbaY5+AvHX9MnsrP2UQ2qKfykLJA+A3huds2JpqAgpvRpGeZ7NseZm0wuUFCCqgzJL3LbzSB5Y3ECnlJWRizL8/k7SmzA4OS1+G9D/4LFHjE/Fcbl1rNr83XQag2EDTRpkgSdmXtPIeU45zsqmlJOXlg12Wu4rPSDfacI2D9IbIW5Ku+CufzUzLPIgHoBfI3aHZnwgORAbM4ZWCRiK+AnqAl3MUZOYGJXy0gUfdMa5/9j5Ucth5Vg0s74KNZyXL3D3sNw3QMjjF4i+1xfTQBvypd/cMprQ4jOzc4o0BvzOJPs1hMUU0NRnVF+drSnqPZCJdvKORnVtTf0u7R0Cy+Q2BeWq5ja4ju30iuXZyP/GMzkwE14xsbU5vMPyV6OJuS/K6SkUh1/QCPMLPsYWgk25BBt0+JYn8dzawb9bGKmKmm46uz0W0jbyu4u/R6k396F35WZ85sGQGr4Ney9eXHPpYU2MxnzfEd1k1E1LEuWkOT8Vwsb8ehR3iAvw4Fkde7HDz3UeUckJ0dNC6paA9mifD0h3KkBA/KafWSFV49NORW6XbjOG6gL/Gqqze+lRZKXrH7F+x5oxwqqHmHILR+fBQb1cpR/gukJbH99z30P5xF05UE/oppDVK7jkmt0W/gWA1TirUdW6sgr5En7pBJmdulKqs25TstU=
+  app:
+    master: seggu-api
+    staging: seggu-api-staging
+  on:
+    repo: kraneos/gg-api
