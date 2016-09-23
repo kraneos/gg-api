@@ -166,6 +166,7 @@ Abrir consola como administrador y ejecutar
 
 Descargarse de [Google Drive](https://drive.google.com/open?id=0B3mGN4mG9YR4OGlXazEyd3ppUHc) el dump de la DB.
 Descomprimir el zip.
+usar este: https://drive.google.com/drive/folders/0B3mGN4mG9YR4eWZUUHRBYkFES2M
 
 Ejecutar el comando.
 
